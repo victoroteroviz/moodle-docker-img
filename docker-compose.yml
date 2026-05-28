@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  moodle:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: moodle_app
+    restart: always
+    ports:
+      - "8080:80"
+    # Pasa todas las variables del .env al contenedor de Moodle
+    env_file:
+      - .env
+    environment:
+      - TZ=${TZ} # Asegura la zona horaria a nivel de sistema
+    volumes:
+      - moodle_data:/var/www/moodledata
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.11
+    container_name: moodle_db
+    restart: always
+    environment:
+      # Variables nativas de MariaDB mapeadas a nuestro .env
+      MYSQL_DATABASE: ${MOODLE_DB_NAME}
+      MYSQL_USER: ${MOODLE_DB_USER}
+      MYSQL_PASSWORD: ${MOODLE_DB_PASS}
+      MYSQL_ROOT_PASSWORD: ${MOODLE_DB_ROOT_PASS}
+      TZ: ${TZ}
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  moodle_data:
+    name: moodle_data
+  db_data:
+    name: moodle_db_data
