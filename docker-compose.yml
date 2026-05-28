@@ -1,23 +1,30 @@
-version: '3.8'
-
 services:
   moodle:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     container_name: moodle_app
     restart: always
     ports:
       - "8080:80"
-    # Pasa todas las variables del .env al contenedor de Moodle
-    env_file:
-      - .env
     environment:
-      - TZ=${TZ} # Asegura la zona horaria a nivel de sistema
+      MOODLE_DB_TYPE: ${MOODLE_DB_TYPE}
+      MOODLE_DB_HOST: ${MOODLE_DB_HOST}
+      MOODLE_DB_NAME: ${MOODLE_DB_NAME}
+      MOODLE_DB_USER: ${MOODLE_DB_USER}
+      MOODLE_DB_PASS: ${MOODLE_DB_PASS}
+      MOODLE_DB_PREFIX: ${MOODLE_DB_PREFIX}
+      MOODLE_URL: ${MOODLE_URL}
+      MOODLE_DATA_DIR: ${MOODLE_DATA_DIR}
+      MOODLE_REVERSE_PROXY: ${MOODLE_REVERSE_PROXY}
+      TZ: ${TZ}
     volumes:
       - moodle_data:/var/www/moodledata
+    networks:
+      - moodle_net
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: mariadb:10.11
@@ -30,8 +37,21 @@ services:
       MYSQL_PASSWORD: ${MOODLE_DB_PASS}
       MYSQL_ROOT_PASSWORD: ${MOODLE_DB_ROOT_PASS}
       TZ: ${TZ}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
     volumes:
       - db_data:/var/lib/mysql
+    networks:
+      - moodle_net
+
+networks:
+  moodle_net:
+    driver: bridge
+    name: moodle_net
 
 volumes:
   moodle_data:
