@@ -8,15 +8,36 @@ services:
     ports:
       - "8080:80"
     environment:
+      # Configuración de Base de Datos
       MOODLE_DB_TYPE: ${MOODLE_DB_TYPE}
       MOODLE_DB_HOST: ${MOODLE_DB_HOST}
       MOODLE_DB_NAME: ${MOODLE_DB_NAME}
       MOODLE_DB_USER: ${MOODLE_DB_USER}
       MOODLE_DB_PASS: ${MOODLE_DB_PASS}
       MOODLE_DB_PREFIX: ${MOODLE_DB_PREFIX}
+      
+      # Configuración del Sitio
       MOODLE_URL: ${MOODLE_URL}
       MOODLE_DATA_DIR: ${MOODLE_DATA_DIR}
       MOODLE_REVERSE_PROXY: ${MOODLE_REVERSE_PROXY}
+      
+      # Configuración de Instalación Inicial
+      MOODLE_ADMIN_USER: ${MOODLE_ADMIN_USER:-admin}
+      MOODLE_ADMIN_PASS: ${MOODLE_ADMIN_PASS:-Admin123!}
+      MOODLE_ADMIN_EMAIL: ${MOODLE_ADMIN_EMAIL:-admin@example.com}
+      MOODLE_SITE_NAME: ${MOODLE_SITE_NAME:-Moodle Site}
+      MOODLE_SITE_SHORTNAME: ${MOODLE_SITE_SHORTNAME:-moodle}
+      MOODLE_LANG: ${MOODLE_LANG:-es}
+      
+      # Configuración SMTP (Opcional)
+      MOODLE_SMTP_HOST: ${MOODLE_SMTP_HOST:-}
+      MOODLE_SMTP_PORT: ${MOODLE_SMTP_PORT:-587}
+      MOODLE_SMTP_USER: ${MOODLE_SMTP_USER:-}
+      MOODLE_SMTP_PASS: ${MOODLE_SMTP_PASS:-}
+      MOODLE_SMTP_FROM: ${MOODLE_SMTP_FROM:-noreply@moodle.local}
+      MOODLE_SMTP_SECURE: ${MOODLE_SMTP_SECURE:-tls}
+      
+      # Sistema
       TZ: ${TZ}
     volumes:
       - moodle_data:/var/www/moodledata
@@ -25,6 +46,12 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/login/index.php"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
 
   db:
     image: mariadb:10.11
@@ -38,7 +65,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${MOODLE_DB_ROOT_PASS}
       TZ: ${TZ}
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", "mariadb-admin", "ping", "--silent"]
       interval: 10s
       timeout: 5s
       retries: 10
