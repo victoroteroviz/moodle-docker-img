@@ -44,7 +44,7 @@ services:
       MOODLE_DEV_MODE: ${MOODLE_DEV_MODE:-false}
     volumes:
       - moodle_data:/var/www/moodledata
-      - ./plugins/moodle-theme_almondb:/var/www/html/public/theme/almondb:rw
+      - ./plugins/theme_almondb_moodledb/almondb:/var/www/html/public/theme/almondb:rw
     networks:
       - moodle_net
     depends_on:

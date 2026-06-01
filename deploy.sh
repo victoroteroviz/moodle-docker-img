@@ -12,7 +12,7 @@ if [ -z "$1" ]; then
 fi
 
 VERSION=$1
-USUARIO=""
+USUARIO="victoroteroviz"
 IMAGE_NAME="${USUARIO}/academia-okip:${VERSION}"
 
 echo -e "${GREEN}===> Construyendo la imagen Docker<===${NC}"
