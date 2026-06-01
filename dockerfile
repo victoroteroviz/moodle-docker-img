@@ -60,7 +60,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Descargar Moodle 5.2 (MOODLE_502_STABLE)
-RUN curl -L https://download.moodle.org/download.php/stable502/moodle-5.2.tgz \
+RUN curl -L https://download.moodle.org/download.php/direct/stable502/moodle-5.2.tgz \
     | tar xz -C /var/www/html --strip-components=1 --no-same-owner \
     && chown -R www-data:www-data /var/www/html
 
@@ -108,6 +108,21 @@ if (getenv('MOODLE_SMTP_HOST')) {
     $CFG->smtpuser = getenv('MOODLE_SMTP_USER') ?: '';
     $CFG->smtppass = getenv('MOODLE_SMTP_PASS') ?: '';
     $CFG->smtpsecure = getenv('MOODLE_SMTP_SECURE') ?: 'tls';
+}
+
+// Modo desarrollo. No usar en producción.
+if (getenv('MOODLE_DEV_MODE') === 'true') {
+    @error_reporting(E_ALL | E_STRICT);
+    @ini_set('display_errors', '1');
+
+    $CFG->debug = E_ALL | E_STRICT;
+    $CFG->debugdisplay = true;
+
+    // Recompila SCSS y evita cachés agresivos durante desarrollo.
+    $CFG->themedesignermode = true;
+    $CFG->cachejs = false;
+    $CFG->cachetemplates = false;
+    $CFG->langstringcache = false;
 }
 
 require_once(__DIR__ . '/lib/setup.php');
