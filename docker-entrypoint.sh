@@ -62,6 +62,13 @@ install_moodle() {
     echo "Instalando Moodle..."
     echo "Esto puede tardar varios minutos..."
     
+    # Limpiar archivos de bloqueo de instalaciones previas
+    echo "Limpiando archivos de bloqueo..."
+    rm -f /var/www/moodledata/climaintenance.html
+    rm -f /var/www/html/climaintenance.html
+    rm -rf /var/www/moodledata/cache/*
+    rm -rf /var/www/moodledata/localcache/*
+    
     # Variables de instalación
     local admin_user="${MOODLE_ADMIN_USER:-admin}"
     local admin_pass="${MOODLE_ADMIN_PASS:-Admin123!}"
@@ -133,6 +140,14 @@ fix_permissions() {
         echo "Ajustando permisos de moodledata..."
         chown -R www-data:www-data /var/www/moodledata
         chmod -R 770 /var/www/moodledata
+    fi
+    
+    # Crear directorio localcache si no existe
+    if [ ! -d /var/www/moodledata/localcache ]; then
+        echo "Creando directorio localcache..."
+        mkdir -p /var/www/moodledata/localcache
+        chown -R www-data:www-data /var/www/moodledata/localcache
+        chmod -R 770 /var/www/moodledata/localcache
     fi
     
     # Asegurar que config.php es legible

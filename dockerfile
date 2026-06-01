@@ -60,13 +60,13 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Descargar Moodle 5.2 (MOODLE_502_STABLE)
-RUN curl -L https://github.com/moodle/moodle/archive/refs/heads/MOODLE_501_STABLE.tar.gz \
+RUN curl -L https://download.moodle.org/download.php/stable502/moodle-5.2.tgz \
     | tar xz -C /var/www/html --strip-components=1 --no-same-owner \
     && chown -R www-data:www-data /var/www/html
 
-# Crear directorio de datos con permisos correctos
+# Crear directorios de datos con permisos correctos
 # CORRECCIÓN: chmod 770 en lugar de 750 para mejor compatibilidad
-RUN mkdir -p /var/www/moodledata \
+RUN mkdir -p /var/www/moodledata /var/www/moodledata/localcache \
     && chown -R www-data:www-data /var/www/moodledata \
     && chmod 770 /var/www/moodledata
 
@@ -98,6 +98,10 @@ if (getenv('MOODLE_REVERSE_PROXY') === 'true') {
     $CFG->sslproxy = true;
 }
 
+// Router Configuration
+$CFG->pathtophp = '/usr/local/bin/php';
+$CFG->localcachedir = '/var/www/moodledata/localcache';
+
 // SMTP Configuration (opcional)
 if (getenv('MOODLE_SMTP_HOST')) {
     $CFG->smtphosts = getenv('MOODLE_SMTP_HOST') . ':' . (getenv('MOODLE_SMTP_PORT') ?: '587');
@@ -109,8 +113,8 @@ if (getenv('MOODLE_SMTP_HOST')) {
 require_once(__DIR__ . '/lib/setup.php');
 EOF
 
-# CORRECCIÓN: Composer install DESPUÉS de config.php
-RUN composer install --no-dev --optimize-autoloader --no-interaction --working-dir=/var/www/html
+# CORRECCIÓN: Composer install DESPUÉS de config.php con optimización completa
+RUN composer install --no-dev --classmap-authoritative --no-interaction --working-dir=/var/www/html
 
 # Ajustar permisos finales
 RUN chown -R www-data:www-data /var/www/html \
