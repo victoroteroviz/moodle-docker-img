@@ -43,6 +43,13 @@
 
 {{> core/local/toast/wrapper}}
 {{{ output.standard_top_of_body_html }}}
+<!-- Start Intro Video (guests only) -->
+    {{^userlogin}}
+        {{#videointroenabled}}
+            {{> theme_almondb/frontpage/videointro }}
+        {{/videointroenabled}}
+    {{/userlogin}}
+<!-- End Intro Video -->
 <!-- Start Header Area -->
     {{#frontpagenavchoice1}}
          {{> theme_almondb/frontpage/header1}}

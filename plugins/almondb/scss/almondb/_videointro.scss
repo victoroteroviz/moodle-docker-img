@@ -1,0 +1,68 @@
+// Intro video popup (shown on the front page to visitors without an active session).
+.almondb-videointro-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 20000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.85);
+    opacity: 1;
+    transition: opacity 0.35s ease;
+
+    &.almondb-videointro-hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.almondb-videointro-dialog {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+}
+
+.almondb-videointro-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 85vh;
+    background: #000;
+    border-radius: 6px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.almondb-videointro-close {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    z-index: 1;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    color: #222;
+    font-size: 1.1rem;
+    line-height: 2.5rem;
+    text-align: center;
+    background: $white;
+    border: 0;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        background: #f1f1f1;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .almondb-videointro-close {
+        top: 0.25rem;
+        right: 0.25rem;
+    }
+}

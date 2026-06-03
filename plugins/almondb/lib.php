@@ -121,6 +121,7 @@ function theme_almondb_pluginfile($course, $cm, $context, $filearea, $args, $for
     if (
         $context->contextlevel == CONTEXT_SYSTEM && ($filearea === 'logo' || $filearea === 'loginbackgroundimage' ||
         $filearea === 'backgroundimage' || substr($filearea, 0, 11) === 'sliderimage' ||
+        substr($filearea, 0, 10) === 'videointro' ||
         substr($filearea, 0, 5) === 'block' || substr($filearea, 0, 3) === 'img')
     ) {
         $theme = theme_config::load('almondb');
@@ -253,6 +254,8 @@ function theme_almondb_theme_url() {
 }
 
 require('lib/slideshow.php');
+require('lib/videointro.php');
+require('lib/langflags.php');
 require('lib/frontpage_settings.php');
 require('lib/frontpage_block.php');
 require('lib/footer_select.php');

@@ -173,6 +173,24 @@ $string['div'] = '</div>';
 $string['frontpageend'] = '--*/*--';
 $string['frontpageenddesc'] = '';
 $string['frontpagealmondb'] = 'Front Page';
+// Intro video (shown to visitors without an active session).
+$string['videointro'] = 'Intro Video';
+$string['videointroheading'] = ': Welcome Intro Video';
+$string['videointroheadingdesc'] = 'Shows a video in a popup when a visitor opens the site home page, but only while they do not have an active session (not logged in).';
+$string['videointroenabled'] = 'Enable intro video';
+$string['videointroenableddesc'] = 'Display the intro video on the home page to visitors without an active session.';
+$string['videointrofile'] = 'Video file';
+$string['videointrofiledesc'] = 'Upload the video to display (mp4, webm or ogg). If both a file and a URL are provided, the uploaded file is used. For best browser compatibility use an H.264 (MP4) video at 1080p or lower; 4K H.264 files often fail to play in browsers and only the poster image is shown.';
+$string['videointrourl'] = 'Video URL';
+$string['videointrourldesc'] = 'Alternatively, paste a direct link to a video file. Used only when no file is uploaded above.';
+$string['videointroposter'] = 'Poster image';
+$string['videointroposterdesc'] = 'Optional image shown before the video starts playing.';
+$string['videointroautoplay'] = 'Autoplay';
+$string['videointroautoplaydesc'] = 'Play the video automatically when the popup opens. The video starts muted so browsers allow autoplay.';
+$string['videointroloop'] = 'Loop';
+$string['videointroloopdesc'] = 'Repeat the video continuously.';
+$string['videointroonce'] = 'Show once per session';
+$string['videointrooncedesc'] = 'Only show the video the first time the visitor opens the home page during their browser session.';
 // Dashboard choice heading (nav).
 $string['dashboardnavchoice'] = 'Dashboard page nav';
 $string['dashboardnavchoicedesc'] = 'Select dashboard page nav to display';

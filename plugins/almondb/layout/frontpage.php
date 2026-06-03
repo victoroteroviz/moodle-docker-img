@@ -97,7 +97,7 @@ $templatecontext = [
     'secondarymoremenu' => $secondarynavigation ?: false,
     'mobileprimarynav' => $primarymenu['mobileprimarynav'],
     'usermenu' => $primarymenu['user'],
-    'langmenu' => $primarymenu['lang'],
+    'langmenu' => theme_almondb_add_lang_flags($primarymenu['lang']),
     'forceblockdraweropen' => $forceblockdraweropen,
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
@@ -112,6 +112,8 @@ $templatecontext = array_merge($templatecontext, theme_almondb_frontpage_section
 $templatecontext = array_merge($templatecontext, theme_almondb_frontpagecolor());
 // Slider.
 $templatecontext = array_merge($templatecontext, theme_almondb_slideshow());
+// Intro video (shown to visitors without an active session).
+$templatecontext = array_merge($templatecontext, theme_almondb_videointro());
 // Block 01.
 $templatecontext = array_merge($templatecontext, theme_almondb_frontpageblock01());
 // Block 02.

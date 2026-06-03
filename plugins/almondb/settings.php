@@ -36,5 +36,6 @@ if ($ADMIN->fulltree) {
     require('settings/frontpage_settings.php');
     require('settings/almondbpage.php');
     require('settings/slideshow.php');
+    require('settings/videointro.php');
     require('settings/frontpage_block.php');
 }
