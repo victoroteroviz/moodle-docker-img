@@ -44,6 +44,9 @@
 {{> core/local/toast/wrapper}}
 {{{ output.standard_top_of_body_html }}}
 <!-- Start Header Area -->
+    {{#frontpagenavchoice1}}
+         {{> theme_almondb/frontpage/header1}}
+    {{/frontpagenavchoice1}}
     {{#frontpagenavchoice2}}
          {{> theme_almondb/frontpage/header2}}
     {{/frontpagenavchoice2}}
@@ -53,9 +56,6 @@
 <!-- End Header Area -->
 <!-- Start Slider Area  -->
     {{> theme_almondb/frontpage/slider}}
-    {{#frontpagenavchoice1}}
-         {{> theme_almondb/frontpage/header1}}
-    {{/frontpagenavchoice1}}
 <!-- End Slider Area -->
 <!-- Start section -->
     {{> theme_almondb/frontpage/frontpage_1 }}
