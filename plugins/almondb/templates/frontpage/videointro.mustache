@@ -32,12 +32,20 @@
         <button type="button" class="almondb-videointro-close" aria-label="{{#str}} closebuttontitle, core {{/str}}">
             <i class="fa fa-times" aria-hidden="true"></i>
         </button>
-        <video class="almondb-videointro-video" muted playsinline controls preload="auto"
-            {{#videointroautoplay}}autoplay{{/videointroautoplay}}
-            {{#videointroloop}}loop{{/videointroloop}}
-            {{#videointroposter}}poster="{{{ videointroposter }}}"{{/videointroposter}}>
-            <source src="{{{ videointrourl }}}"{{#videointromime}} type="{{ videointromime }}"{{/videointromime}}>
-        </video>
+        {{#videointroembed}}
+            <div class="almondb-videointro-embed">
+                <iframe src="{{{ videointroembedurl }}}" title="{{#str}} videointro, theme_almondb {{/str}}"
+                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        {{/videointroembed}}
+        {{^videointroembed}}
+            <video class="almondb-videointro-video" muted playsinline controls preload="auto"
+                {{#videointroautoplay}}autoplay{{/videointroautoplay}}
+                {{#videointroloop}}loop{{/videointroloop}}
+                {{#videointroposter}}poster="{{{ videointroposter }}}"{{/videointroposter}}>
+                <source src="{{{ videointrourl }}}"{{#videointromime}} type="{{ videointromime }}"{{/videointromime}}>
+            </video>
+        {{/videointroembed}}
     </div>
 </div>
 {{#js}}
