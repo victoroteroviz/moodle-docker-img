@@ -100,6 +100,8 @@ $string['sliderbuttonurl'] = 'Slide button link';
 $string['sliderbuttonurldesc'] = 'Enter the target destination of the slide\'s image button link';
 $string['slidershowheight'] = 'Slidershow Height';
 $string['slidershowheight_desc'] = 'Adjust the height of the slideshow on the Site Home pages.';
+$string['sliderfontsize'] = 'Slider caption font size';
+$string['sliderfontsizedesc'] = 'Base font size for the slide caption text (designs 5 and 6).';
 $string['slideropacity'] = 'Slider opacity';
 $string['slideropacitydesc'] = 'Frontpage color opacity to slider';
 // Almondbpage start !DO NOT DELETE !DO NOT CHANGE.

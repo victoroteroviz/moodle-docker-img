@@ -141,4 +141,62 @@
         </div>
     </div>
     {{/slider4}}
+    {{! slider 5 - text panel on the left}}
+    {{#slider5}}
+    <div id="slider5" class="container-fluid p-0">
+        <div id="header-carousel5" class="carousel slide carousel-fade" data-bs-ride="true">
+            <div class="carousel-inner">
+                {{#slides}}
+                <div class="carousel-item {{#active}}active{{/active}}" style="min-height: 300px;">
+                    <img class="position-relative w-100" src="{{{ image }}}" alt="slide-{{{ key }}}" style="min-height: 300px; object-fit: cover; height:{{{slidershowheight}}}px;">
+                    <div class="carousel-caption sld-side-caption">
+                        <div class="sld-side-content">
+                            {{#title}}<h5 class="text-uppercase mb-md-3 text-light">{{{ title }}}</h5>{{/title}}
+                            {{#caption}}<div class="sld-side-text mb-md-4" style="font-size: {{{sliderfontsize}}}px;">{{{ caption }}}</div>{{/caption}}
+                            {{#button}}<a href="{{{buttonurl}}}" class="hybtn py-md-2 px-md-4 fw-semi-bold mt-2">{{{ button }}}</a>{{/button}}
+                        </div>
+                    </div>
+                </div>
+                {{/slides}}
+            </div>
+            <a class="carousel-control-prev" href="#header-carousel5" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden-focusable">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#header-carousel5" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden-focusable">Next</span>
+            </a>
+        </div>
+    </div>
+    {{/slider5}}
+    {{! slider 6 - text panel on the right}}
+    {{#slider6}}
+    <div id="slider6" class="container-fluid p-0">
+        <div id="header-carousel6" class="carousel slide carousel-fade" data-bs-ride="true">
+            <div class="carousel-inner">
+                {{#slides}}
+                <div class="carousel-item {{#active}}active{{/active}}" style="min-height: 300px;">
+                    <img class="position-relative w-100" src="{{{ image }}}" alt="slide-{{{ key }}}" style="min-height: 300px; object-fit: cover; height:{{{slidershowheight}}}px;">
+                    <div class="carousel-caption sld-side-caption sld-side-right">
+                        <div class="sld-side-content">
+                            {{#title}}<h5 class="text-uppercase mb-md-3 text-light">{{{ title }}}</h5>{{/title}}
+                            {{#caption}}<div class="sld-side-text mb-md-4" style="font-size: {{{sliderfontsize}}}px;">{{{ caption }}}</div>{{/caption}}
+                            {{#button}}<a href="{{{buttonurl}}}" class="hybtn py-md-2 px-md-4 fw-semi-bold mt-2">{{{ button }}}</a>{{/button}}
+                        </div>
+                    </div>
+                </div>
+                {{/slides}}
+            </div>
+            <a class="carousel-control-prev" href="#header-carousel6" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden-focusable">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#header-carousel6" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden-focusable">Next</span>
+            </a>
+        </div>
+    </div>
+    {{/slider6}}
 {{/sliderenabled}}

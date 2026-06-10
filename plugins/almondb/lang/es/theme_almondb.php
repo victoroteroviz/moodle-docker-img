@@ -100,6 +100,8 @@ $string['sliderbuttonurl'] = 'Enlace del botón de la diapositiva';
 $string['sliderbuttonurldesc'] = 'Introduzca el destino del enlace del botón de imagen de la diapositiva';
 $string['slidershowheight'] = 'Altura del carrusel';
 $string['slidershowheight_desc'] = 'Ajuste la altura del carrusel en las páginas de inicio del sitio.';
+$string['sliderfontsize'] = 'Tamaño de fuente del carrusel';
+$string['sliderfontsizedesc'] = 'Tamaño base de la fuente del texto de la diapositiva (diseños 5 y 6).';
 $string['slideropacity'] = 'Opacidad del carrusel';
 $string['slideropacitydesc'] = 'Opacidad del color de la página de inicio sobre el carrusel';
 // Almondbpage start !DO NOT DELETE !DO NOT CHANGE.

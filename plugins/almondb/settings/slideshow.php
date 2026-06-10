@@ -41,7 +41,7 @@ $title = get_string('sliderdesign', 'theme_almondb');
 $description = get_string('sliderdesigndesc', 'theme_almondb');
 $default = 1;
 $options = [];
-for ($i = 1; $i < 5; $i++) {
+for ($i = 1; $i < 7; $i++) {
     $options[$i] = $i;
 }
 $setting = new admin_setting_configselect($name, $title, $description, $default, $options);
@@ -95,6 +95,19 @@ $options = [
     '575' => '575',
     '600' => '600',
 ];
+$setting = new admin_setting_configselect($name, $title, $description, $default, $options);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$page->add($setting);
+
+// Slider caption font size.
+$name = 'theme_almondb/sliderfontsize';
+$title = get_string('sliderfontsize', 'theme_almondb');
+$description = get_string('sliderfontsizedesc', 'theme_almondb');
+$default = '16';
+$options = [];
+for ($i = 12; $i <= 48; $i += 2) {
+    $options[$i] = $i . 'px';
+}
 $setting = new admin_setting_configselect($name, $title, $description, $default, $options);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);

@@ -39,6 +39,7 @@ function theme_almondb_slideshow() {
     $templatecontext['slideropacity'] = $theme->settings->slideropacity;
     $templatecontext['slider' . $theme->settings->sliderdesign] = $theme->settings->sliderdesign;
     $templatecontext['slidershowheight'] = $theme->settings->slidershowheight;
+    $templatecontext['sliderfontsize'] = !empty($theme->settings->sliderfontsize) ? $theme->settings->sliderfontsize : 16;
     $slidercount = $theme->settings->slidercount;
     for ($i = 1, $j = 0; $i <= $slidercount; $i++, $j++) {
         $sliderimage = "sliderimage{$i}";
@@ -55,7 +56,11 @@ function theme_almondb_slideshow() {
         }
         $templatecontext['slides'][$j]['image'] = $image;
         $templatecontext['slides'][$j]['title'] = format_string($theme->settings->$slidertitle);
-        $templatecontext['slides'][$j]['caption'] = format_string($theme->settings->$slidercap);
+        $templatecontext['slides'][$j]['caption'] = format_text(
+            $theme->settings->$slidercap,
+            FORMAT_HTML,
+            ['noclean' => true]
+        );
         $templatecontext['slides'][$j]['button'] = format_string($theme->settings->$sliderbutton);
         $templatecontext['slides'][$j]['buttonurl'] = $theme->settings->$sliderurl;
         if ($i === 1) {

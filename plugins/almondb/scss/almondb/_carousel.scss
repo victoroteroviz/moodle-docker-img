@@ -74,3 +74,62 @@
         font-weight: 700 !important;
     }
 }
+
+/* Slider 5 (text left) & Slider 6 (text right) - side text panel. */
+#slider5 .carousel-caption.sld-side-caption,
+#slider6 .carousel-caption.sld-side-caption {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    width: 45%;
+    text-align: left;
+    background: rgba(0, 0, 0, .5);
+    max-width: unset;
+    display: flex;
+    align-items: center;
+    padding: 2rem 3rem;
+    z-index: 1;
+}
+
+/* Slider 6 places the panel on the right side. */
+#slider6 .carousel-caption.sld-side-caption.sld-side-right {
+    left: auto;
+    right: 0;
+}
+
+#slider5 .sld-side-content,
+#slider6 .sld-side-content {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#slider5 .sld-side-text,
+#slider6 .sld-side-text {
+    color: #fff;
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+#slider5 .sld-side-content h5,
+#slider6 .sld-side-content h5 {
+    font-weight: 600 !important;
+}
+
+@media (max-width: 991.98px) {
+    #slider5 .carousel-caption.sld-side-caption,
+    #slider6 .carousel-caption.sld-side-caption {
+        width: 100%;
+        padding: 1.5rem 2rem;
+    }
+
+    #slider5 .sld-side-content,
+    #slider6 .sld-side-content {
+        max-width: unset;
+        margin: 0 auto;
+    }
+}
