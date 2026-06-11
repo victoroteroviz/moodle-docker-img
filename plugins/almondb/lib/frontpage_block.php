@@ -606,18 +606,83 @@ function theme_almondb_frontpageblock11() {
  *
  * @return array Map of instance number => ['index' => int, 'html' => string, 'image' => string].
  */
+/**
+ * Allowed "image + text" tile layouts for the dynamic HTML blocks.
+ *
+ * The value encodes where the image tile sits relative to the text tile:
+ *   image-left   image | text   (side by side)
+ *   image-right  text  | image  (side by side)
+ *   image-top    image / text   (stacked)
+ *   image-bottom text  / image  (stacked)
+ *
+ * @return string[] Ordered list of valid layout tokens.
+ */
+function theme_almondb_htmllayout_options() {
+    return ['image-left', 'image-right', 'image-top', 'image-bottom'];
+}
+
+/**
+ * Validate a stored HTML block layout, falling back to the default.
+ *
+ * @param mixed $value Raw stored value.
+ * @return string A valid layout token.
+ */
+function theme_almondb_htmllayout_normalise($value) {
+    $value = trim((string)$value);
+    return in_array($value, theme_almondb_htmllayout_options(), true) ? $value : 'image-left';
+}
+
+/**
+ * Build the list of dynamic "HTML + image" blocks for the frontpage.
+ *
+ * Each block is rendered as two tiles - an image and a free text/HTML area -
+ * arranged according to its configured layout (image left/right/top/bottom).
+ * Legacy blocks that embed the image inside the text with the [[image]]
+ * placeholder keep working: in that case the placeholder is resolved inline
+ * and no separate image tile is shown.
+ *
+ * @return array Map of instance number => template context for htmlblock.mustache.
+ */
 function theme_almondb_get_htmlblocks() {
     $theme = theme_config::load('almondb');
     $count = (int)($theme->settings->blockhtmlcount ?? 0);
     $blocks = [];
     for ($i = 1; $i <= $count; $i++) {
         $imgsetting = 'blockhtmlimg' . $i;
+        $textsetting = 'blockhtmltext' . $i;
         $capsetting = 'blockhtmlcaption' . $i;
+        $layoutsetting = 'blockhtmllayout' . $i;
+
         $image = (string)$theme->setting_file_url($imgsetting, $imgsetting);
-        $html = format_text($theme->settings->$capsetting ?? '');
-        // Insert the uploaded image wherever the placeholder appears.
-        $html = str_replace(['[[image]]', '{{image}}', '{{imagen}}'], $image, $html);
-        $blocks[$i] = ['index' => $i, 'html' => $html, 'image' => $image];
+        // Prefer the new dedicated text field; fall back to the legacy caption.
+        $rawtext = (string)($theme->settings->$textsetting ?? '');
+        if ($rawtext === '') {
+            $rawtext = (string)($theme->settings->$capsetting ?? '');
+        }
+        $placeholders = ['[[image]]', '{{image}}', '{{imagen}}'];
+        $hasplaceholder = false;
+        foreach ($placeholders as $token) {
+            if (strpos($rawtext, $token) !== false) {
+                $hasplaceholder = true;
+                break;
+            }
+        }
+        // Legacy mode: image is embedded inside the text, no separate tile.
+        $text = format_text(str_replace($placeholders, $image, $rawtext));
+        $hasimage = ($image !== '' && !$hasplaceholder);
+        $layout = theme_almondb_htmllayout_normalise($theme->settings->$layoutsetting ?? '');
+
+        $blocks[$i] = [
+            'index' => $i,
+            'image' => $image,
+            'hasimage' => $hasimage,
+            'text' => $text,
+            'hastext' => (trim(strip_tags($text)) !== '' || strpos($text, '<img') !== false),
+            'layout' => $layout,
+            'layoutclass' => 'hb-' . $layout,
+            // Kept for backwards compatibility with any custom overrides.
+            'html' => $text,
+        ];
     }
     return $blocks;
 }

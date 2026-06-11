@@ -84,6 +84,14 @@ function theme_almondb_normalise_block_order($stored) {
     return $order;
 }
 
+// The helper functions above are also required from the frontpage layout,
+// where Moodle's admin library (and therefore the admin_setting base class)
+// is not loaded. Only declare the admin setting class when that base class
+// exists, i.e. when this file is included from the theme settings pages.
+if (!class_exists('admin_setting')) {
+    return;
+}
+
 /**
  * Admin setting: drag and drop ordering of the frontpage content blocks.
  */
@@ -139,37 +147,62 @@ class admin_setting_almondb_blockorder extends admin_setting {
 
         $items = '';
         foreach ($order as $id) {
-            if (strpos($id, 'html') === 0) {
+            $ishtml = (strpos($id, 'html') === 0);
+            if ($ishtml) {
                 $label = get_string('blockhtmlorderlabel', 'theme_almondb', (int)substr($id, 4));
                 $enabled = true;
+                $typeicon = 'fa-code';
+                $typelabel = get_string('block_type_html', 'theme_almondb');
             } else {
                 $label = get_string('block' . $id . 'info', 'theme_almondb');
                 $enabled = (bool)get_config('theme_almondb', 'block' . $id . 'enabled');
+                $typeicon = 'fa-th-large';
+                $typelabel = get_string('block_type_fixed', 'theme_almondb');
             }
             $statuslabel = $enabled
                 ? get_string('block_enabled', 'theme_almondb')
                 : get_string('block_disabled', 'theme_almondb');
             $statusclass = $enabled ? 'badge bg-success text-white' : 'badge bg-secondary text-white';
-            $itemclass = 'list-group-item d-flex align-items-center' . ($enabled ? '' : ' text-muted');
+            $itemclass = 'list-group-item d-flex align-items-center theme-almondb-blockorder-item'
+                . ($enabled ? '' : ' text-muted')
+                . ($ishtml ? ' is-html' : ' is-fixed');
 
             $items .= html_writer::tag('li',
-                html_writer::tag('i', '', ['class' => 'fa fa-arrows-v me-2', 'aria-hidden' => 'true']) .
-                html_writer::tag('span', s($label), ['class' => 'flex-grow-1']) .
-                html_writer::tag('span', s($statuslabel), ['class' => $statusclass]),
+                html_writer::tag('i', '',
+                    ['class' => 'fa fa-bars handle me-3', 'aria-hidden' => 'true']) .
+                html_writer::tag('i', '',
+                    ['class' => 'fa ' . $typeicon . ' type-icon me-2', 'title' => $typelabel, 'aria-hidden' => 'true']) .
+                html_writer::tag('span', s($label), ['class' => 'flex-grow-1 fw-medium']) .
+                html_writer::tag('span', s($statuslabel), ['class' => $statusclass . ' ms-2']),
                 [
                     'class' => $itemclass,
                     'draggable' => 'true',
                     'data-blockid' => $id,
-                    'style' => 'cursor: move;',
                 ]
             );
         }
 
+        $css = <<<CSS
+<style>
+.theme-almondb-blockorder { max-width: 560px; border-radius: .5rem; overflow: hidden; }
+.theme-almondb-blockorder-item { cursor: grab; padding: .65rem .9rem; border-left: 4px solid transparent; transition: background-color .12s ease, box-shadow .12s ease; }
+.theme-almondb-blockorder-item:active { cursor: grabbing; }
+.theme-almondb-blockorder-item:hover { background-color: #f4f7fb; box-shadow: inset 0 0 0 1px rgba(13,110,253,.15); }
+.theme-almondb-blockorder-item.is-html { border-left-color: #6f42c1; }
+.theme-almondb-blockorder-item.is-fixed { border-left-color: #0d6efd; }
+.theme-almondb-blockorder-item .handle { color: #adb5bd; }
+.theme-almondb-blockorder-item .type-icon { width: 1.1em; text-align: center; }
+.theme-almondb-blockorder-item.is-html .type-icon { color: #6f42c1; }
+.theme-almondb-blockorder-item.is-fixed .type-icon { color: #0d6efd; }
+.theme-almondb-blockorder-item.dragging { opacity: .4; }
+</style>
+CSS;
+
         $list = html_writer::tag('ul', $items, [
             'id' => $listid,
             'class' => 'list-group theme-almondb-blockorder',
-            'style' => 'max-width: 520px;',
         ]);
+        $list = $css . $list;
 
         $hidden = html_writer::empty_tag('input', [
             'type' => 'hidden',
@@ -199,10 +232,10 @@ class admin_setting_almondb_blockorder extends admin_setting {
         var li = e.target.closest('li[data-blockid]');
         if (!li) { return; }
         dragged = li;
-        li.style.opacity = '0.4';
+        li.classList.add('dragging');
     });
     list.addEventListener('dragend', function() {
-        if (dragged) { dragged.style.opacity = ''; }
+        if (dragged) { dragged.classList.remove('dragging'); }
         dragged = null;
         sync();
     });

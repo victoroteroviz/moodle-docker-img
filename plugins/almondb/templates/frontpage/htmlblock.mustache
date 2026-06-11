@@ -17,12 +17,31 @@
 {{!
     @template theme_almondb/frontpage/htmlblock
 
-    Renders a single dynamic "HTML + image" block.
+    Renders a single dynamic "HTML + image" block as two tiles (image + text)
+    arranged according to the configured layout.
 
     Context variables required for this template:
     * index - Instance number (used for the section id).
-    * html - Already formatted HTML, with the image placeholder resolved.
+    * hasimage - Whether to render a separate image tile.
+    * image - Resolved image URL.
+    * hastext - Whether to render the text tile.
+    * text - Already formatted text/HTML.
+    * layoutclass - CSS class controlling the tile arrangement
+                    (hb-image-left | hb-image-right | hb-image-top | hb-image-bottom).
 }}
-<section id="htmlblock{{index}}" class="hy-mt-50">
-    {{{html}}}
+<section id="htmlblock{{index}}" class="hy-mt-50 hb-section">
+    <div class="container">
+        <div class="hb-tiles {{layoutclass}}">
+            {{#hasimage}}
+                <div class="hb-tile hb-tile-image">
+                    <img src="{{image}}" alt="" class="img-fluid">
+                </div>
+            {{/hasimage}}
+            {{#hastext}}
+                <div class="hb-tile hb-tile-text">
+                    {{{text}}}
+                </div>
+            {{/hastext}}
+        </div>
+    </div>
 </section>

@@ -286,6 +286,16 @@ $string['blockorder'] = 'Orden de los bloques';
 $string['blockorderdesc'] = 'Arrastra los bloques para definir el orden en que aparecen en la portada. Los bloques desactivados conservan su posición en la lista pero no se muestran en la página.';
 $string['block_enabled'] = 'Activado';
 $string['block_disabled'] = 'Desactivado';
+$string['block_type_fixed'] = 'Bloque de contenido';
+$string['block_type_html'] = 'Bloque HTML + imagen';
+// Pestañas de los bloques de la portada.
+$string['theme_almondb_blockordertab'] = 'Bloques: Orden';
+$string['theme_almondb_blockorderheading'] = 'Orden de los bloques de la portada';
+$string['theme_almondb_blockorderintrodesc'] = 'Arrastra los bloques para definir cómo se ordenan en la portada. Aquí aparecen tanto los bloques de contenido fijos como los bloques HTML que crees en la pestaña «Bloques: HTML». Configura el contenido de cada bloque en sus pestañas correspondientes.';
+$string['theme_almondb_blockcontenttab'] = 'Bloques: Contenido';
+$string['theme_almondb_blockcontentheading'] = 'Bloques de contenido';
+$string['theme_almondb_blockcontentintrodesc'] = 'Activa y configura cada bloque de contenido fijo. El orden en que se muestran se define en la pestaña «Bloques: Orden».';
+$string['theme_almondb_blockhtmltab'] = 'Bloques: HTML';
 // Bloques HTML + imagen dinámicos.
 $string['blockhtmlinfo'] = 'Bloques HTML + imagen';
 $string['blockhtmlinfodesc'] = 'Crea tantos bloques de HTML libre con imagen como necesites. Cada bloque se puede colocar de forma independiente en la lista de orden de bloques de arriba. Usa el marcador [[image]] dentro del HTML para insertar la imagen subida, por ejemplo &lt;img src="[[image]]"&gt;.';
@@ -296,6 +306,14 @@ $string['blockhtmlimgdesc'] = 'Sube una imagen para este bloque. Insértala en e
 $string['blockhtmlcaption'] = 'HTML del bloque {$a}';
 $string['blockhtmlcaptiondesc'] = 'Contenido HTML libre. Escribe [[image]] donde quieras que aparezca la imagen subida, por ejemplo &lt;img src="[[image]]" alt=""&gt;.';
 $string['blockhtmlorderlabel'] = 'HTML + Imagen #{$a}';
+$string['blockhtmlblockheading'] = 'Bloque HTML + imagen #{$a}';
+$string['blockhtmltext'] = 'Texto del bloque {$a}';
+$string['blockhtmltextdesc'] = 'La ficha de texto/HTML de este bloque. La imagen se sube arriba; usa el control de disposición de abajo para acomodarlas. (Sugerencia: aún puedes incrustar la imagen dentro del texto con el marcador [[image]]; en ese caso la ficha de imagen separada se oculta.)';
+$string['blockhtmllayout'] = 'Disposición del bloque {$a}';
+$string['blockhtmllayoutdesc'] = 'Arrastra las fichas de imagen y texto para acomodarlas, y marca «Dividir verticalmente» para apilarlas en lugar de ponerlas lado a lado.';
+$string['blockhtmllayout_image'] = 'Imagen';
+$string['blockhtmllayout_text'] = 'Texto';
+$string['blockhtmllayout_vertical'] = 'Dividir verticalmente (apilar imagen y texto)';
 // Frontpage HTML block.
 $string['theme_almondb_frontpageblock'] = 'Bloque';
 $string['theme_almondb_frontpageblockheading'] = 'Bloques de la página de inicio';

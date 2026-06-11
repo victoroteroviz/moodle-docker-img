@@ -29,6 +29,8 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
+global $CFG;
+require_once($CFG->dirroot . '/theme/almondb/settings/htmllayout_setting.php');
 // Section info.
 $name = 'theme_almondb/blockhtmlinfo';
 $heading = get_string('blockhtmlinfo', 'theme_almondb');
@@ -47,22 +49,34 @@ for ($i = 0; $i <= 10; $i++) {
 $setting = new admin_setting_configselect($name, $title, $description, $default, $options);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
-// One image + HTML editor per configured block.
+// Image, text and drag-and-drop layout per configured block.
 $count = (int)get_config('theme_almondb', 'blockhtmlcount');
 for ($i = 1; $i <= $count; $i++) {
-    // Block image.
+    // Per-block sub heading so each block reads as its own card.
+    $name = 'theme_almondb/blockhtmlheading' . $i;
+    $heading = get_string('blockhtmlblockheading', 'theme_almondb', $i);
+    $setting = new admin_setting_heading($name, $heading, '');
+    $page->add($setting);
+    // Block image (one tile).
     $name = 'theme_almondb/blockhtmlimg' . $i;
     $title = get_string('blockhtmlimg', 'theme_almondb', $i);
     $description = get_string('blockhtmlimgdesc', 'theme_almondb');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'blockhtmlimg' . $i);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
-    // Block HTML.
-    $name = 'theme_almondb/blockhtmlcaption' . $i;
-    $title = get_string('blockhtmlcaption', 'theme_almondb', $i);
-    $description = get_string('blockhtmlcaptiondesc', 'theme_almondb');
+    // Block text (the other tile).
+    $name = 'theme_almondb/blockhtmltext' . $i;
+    $title = get_string('blockhtmltext', 'theme_almondb', $i);
+    $description = get_string('blockhtmltextdesc', 'theme_almondb');
     $default = '';
     $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+    // Drag-and-drop tile layout (image left/right/top/bottom).
+    $name = 'theme_almondb/blockhtmllayout' . $i;
+    $title = get_string('blockhtmllayout', 'theme_almondb', $i);
+    $description = get_string('blockhtmllayoutdesc', 'theme_almondb');
+    $setting = new admin_setting_almondb_htmllayout($name, $title, $description, 'image-left');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 }

@@ -286,6 +286,16 @@ $string['blockorder'] = 'Block order';
 $string['blockorderdesc'] = 'Drag the blocks to set the order in which they appear on the front page. Disabled blocks keep their position in the list but are not shown on the page.';
 $string['block_enabled'] = 'Enabled';
 $string['block_disabled'] = 'Disabled';
+$string['block_type_fixed'] = 'Content block';
+$string['block_type_html'] = 'HTML + image block';
+// Frontpage block tabs.
+$string['theme_almondb_blockordertab'] = 'Blocks: Order';
+$string['theme_almondb_blockorderheading'] = 'Frontpage block order';
+$string['theme_almondb_blockorderintrodesc'] = 'Drag the blocks to set how they are ordered on the front page. Both the fixed content blocks and any HTML blocks you create in the "Blocks: HTML" tab appear here. Configure the contents of each block in their own tabs.';
+$string['theme_almondb_blockcontenttab'] = 'Blocks: Content';
+$string['theme_almondb_blockcontentheading'] = 'Content blocks';
+$string['theme_almondb_blockcontentintrodesc'] = 'Enable and configure each fixed content block. The order in which they are shown is set in the "Blocks: Order" tab.';
+$string['theme_almondb_blockhtmltab'] = 'Blocks: HTML';
 // Dynamic HTML + image blocks.
 $string['blockhtmlinfo'] = 'HTML + image blocks';
 $string['blockhtmlinfodesc'] = 'Create as many free HTML blocks with an image as you need. Each block can be placed independently in the block order list above. Use the placeholder [[image]] inside the HTML to insert the uploaded image, e.g. &lt;img src="[[image]]"&gt;.';
@@ -296,6 +306,14 @@ $string['blockhtmlimgdesc'] = 'Upload an image for this block. Insert it in the 
 $string['blockhtmlcaption'] = 'HTML for block {$a}';
 $string['blockhtmlcaptiondesc'] = 'Free HTML content. Write [[image]] where you want the uploaded image to appear, for example &lt;img src="[[image]]" alt=""&gt;.';
 $string['blockhtmlorderlabel'] = 'HTML + Image #{$a}';
+$string['blockhtmlblockheading'] = 'HTML + image block #{$a}';
+$string['blockhtmltext'] = 'Text for block {$a}';
+$string['blockhtmltextdesc'] = 'The text/HTML tile of this block. The image tile is uploaded above; use the layout control below to arrange them. (Tip: you can still embed the image inline with the [[image]] placeholder, in which case the separate image tile is hidden.)';
+$string['blockhtmllayout'] = 'Layout for block {$a}';
+$string['blockhtmllayoutdesc'] = 'Drag the image and text tiles to arrange them, and tick "Split vertically" to stack them instead of placing them side by side.';
+$string['blockhtmllayout_image'] = 'Image';
+$string['blockhtmllayout_text'] = 'Text';
+$string['blockhtmllayout_vertical'] = 'Split vertically (stack image and text)';
 // Frontpage HTML block.
 $string['theme_almondb_frontpageblock'] = 'Block';
 $string['theme_almondb_frontpageblockheading'] = 'Front Page Blocks';

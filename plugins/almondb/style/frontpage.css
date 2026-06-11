@@ -1067,3 +1067,48 @@ body.scrolled .scrollUp {
         margin-bottom: 30px;
     }
 }
+
+/* Dynamic HTML + image blocks: image/text tile layouts. */
+.hb-section {
+    padding: 30px 0;
+}
+.hb-tiles {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+.hb-tiles.hb-image-left {
+    flex-direction: row;
+}
+.hb-tiles.hb-image-right {
+    flex-direction: row-reverse;
+}
+.hb-tiles.hb-image-top {
+    flex-direction: column;
+}
+.hb-tiles.hb-image-bottom {
+    flex-direction: column-reverse;
+}
+.hb-tiles .hb-tile {
+    flex: 1 1 0;
+    min-width: 0;
+}
+.hb-tiles.hb-image-top .hb-tile,
+.hb-tiles.hb-image-bottom .hb-tile {
+    width: 100%;
+}
+.hb-tiles .hb-tile-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+@media (max-width: 767px) {
+    .hb-tiles.hb-image-left,
+    .hb-tiles.hb-image-right {
+        flex-direction: column;
+    }
+    .hb-tiles .hb-tile {
+        width: 100%;
+    }
+}
