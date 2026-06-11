@@ -25,6 +25,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 $page = new admin_settingpage('theme_almondb_block', get_string('theme_almondb_frontpageblock', 'theme_almondb'));
+// Drag and drop ordering of the frontpage content blocks.
+require_once('blockorder_setting.php');
+$page->add(
+    new admin_setting_almondb_blockorder(
+        'theme_almondb/blockorder',
+        get_string('blockorder', 'theme_almondb'),
+        get_string('blockorderdesc', 'theme_almondb')
+    )
+);
 require('blocks/block01.php');
 require('blocks/block02.php');
 require('blocks/block03.php');
@@ -36,6 +45,7 @@ require('blocks/block08.php');
 require('blocks/block09.php');
 require('blocks/block10.php');
 require('blocks/block11.php');
+require('blocks/htmlblocks.php');
 require('blocks/block18.php');
 require('blocks/block19.php');
 require('blocks/block20.php');

@@ -33,7 +33,9 @@
             <div class="d-none d-sm-none d-md-block ms-auto pb-3">
                 <div>
                     <a class="btn-sm float-sm-start block04design1__arrow text-decoration-none" href="#block04design1Carousel" role="button" data-bs-slide="prev"><i class="fa fa-chevron-left"></i></a>
+                    {{#block04buttonenabled}}
                     <a class="hire-us-btn hybtn" href="{{block04buttonlink}}">{{block04button}}</a>
+                    {{/block04buttonenabled}}
                     <a class="btn-sm float-sm-end block04design1__arrow text-decoration-none" href="#block04design1Carousel" role="button" data-bs-slide="next"><i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
@@ -79,9 +81,11 @@
 
         {{! This Code Block is For Mobile Edition }}
         <div class="text-center my-3 d-md-none d-lg-none d-xl-none">
+            {{#block04buttonenabled}}
             <div class="blockbgcolor-b">
                 <a class="hire-us-btn hybtn" href="{{block04buttonlink}}">{{block04button}}</a>
-            </div>  
+            </div>
+            {{/block04buttonenabled}}
             <div id="block04design1CarouselMobile" class="carousel slide w-100" data-ride="carousel">
                 <div class="carousel-inner w-100" >
                     {{#block04}}

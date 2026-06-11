@@ -168,6 +168,8 @@ $string['almondbpagefootersimple'] = 'Pie de la página';
 $string['almondbpagefootersimpledesc'] = 'Agregar pie de página a la página informativa';
 // Button settings.
 $string['button'] = 'Botón';
+$string['buttonenabled'] = 'Mostrar botón';
+$string['buttonenableddesc'] = 'Muestra u oculta el botón de llamada a la acción en este bloque.';
 $string['buttonlink'] = 'https://themesalmond.com/';
 // Theme almondb settings !DO NOT DELETE !DO NOT CHANGE.
 $string['divdiv'] = '</div></div></div>';
@@ -279,6 +281,21 @@ $string['frontpagesection1_9'] = 'Sección 9';
 $string['frontpagesectiondesc1_9'] = 'Sección 9 de la página de inicio';
 $string['frontpagesection1_10'] = 'Sección 10';
 $string['frontpagesectiondesc1_10'] = 'Sección 10 de la página de inicio';
+// Orden de los bloques de la portada (arrastrar y soltar).
+$string['blockorder'] = 'Orden de los bloques';
+$string['blockorderdesc'] = 'Arrastra los bloques para definir el orden en que aparecen en la portada. Los bloques desactivados conservan su posición en la lista pero no se muestran en la página.';
+$string['block_enabled'] = 'Activado';
+$string['block_disabled'] = 'Desactivado';
+// Bloques HTML + imagen dinámicos.
+$string['blockhtmlinfo'] = 'Bloques HTML + imagen';
+$string['blockhtmlinfodesc'] = 'Crea tantos bloques de HTML libre con imagen como necesites. Cada bloque se puede colocar de forma independiente en la lista de orden de bloques de arriba. Usa el marcador [[image]] dentro del HTML para insertar la imagen subida, por ejemplo &lt;img src="[[image]]"&gt;.';
+$string['blockhtmlcount'] = 'Cantidad de bloques HTML + imagen';
+$string['blockhtmlcountdesc'] = 'Cuántos bloques HTML + imagen crear. Pon 0 para desactivarlos. Tras guardar, aparecerán abajo esa cantidad de campos de imagen y HTML.';
+$string['blockhtmlimg'] = 'Imagen del bloque HTML {$a}';
+$string['blockhtmlimgdesc'] = 'Sube una imagen para este bloque. Insértala en el HTML con el marcador [[image]].';
+$string['blockhtmlcaption'] = 'HTML del bloque {$a}';
+$string['blockhtmlcaptiondesc'] = 'Contenido HTML libre. Escribe [[image]] donde quieras que aparezca la imagen subida, por ejemplo &lt;img src="[[image]]" alt=""&gt;.';
+$string['blockhtmlorderlabel'] = 'HTML + Imagen #{$a}';
 // Frontpage HTML block.
 $string['theme_almondb_frontpageblock'] = 'Bloque';
 $string['theme_almondb_frontpageblockheading'] = 'Bloques de la página de inicio';

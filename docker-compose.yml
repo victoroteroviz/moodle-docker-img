@@ -44,7 +44,7 @@ services:
       MOODLE_DEV_MODE: ${MOODLE_DEV_MODE:-false}
     volumes:
       - moodle_data:/var/www/moodledata
-      - ./plugins/almondb:/var/www/html/public/theme/almondb:rw
+      - ~/Documentos/Sistemas/okip_uni/docker-files/plugins/almondb:/var/www/html/public/theme/almondb:rw
     networks:
       - moodle_net
     depends_on:

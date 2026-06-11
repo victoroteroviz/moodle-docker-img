@@ -35,6 +35,7 @@ function theme_almondb_frontpageblock01() {
     }
     $templatecontext['block01caption'] = format_text($theme->settings->block01caption);
     $templatecontext['block01button'] = format_string($theme->settings->block01button);
+    $templatecontext['block01buttonenabled'] = $theme->settings->block01buttonenabled ?? 1;
     $templatecontext['block01buttonlink'] = $theme->settings->block01buttonlink;
     $templatecontext['block01color'] = $theme->settings->block01color;
 
@@ -52,6 +53,7 @@ function theme_almondb_frontpageblock02() {
     if (empty($templatecontext['block02enabled'])) {
         return $templatecontext;
     }
+    $templatecontext['block02buttonenabled'] = $theme->settings->block02buttonenabled ?? 1;
     $count = $theme->settings->block02count;
     for ($i = 1, $j = 0; $i <= $count; $i++, $j++) {
         $block02img = "sliderimageblock02img{$i}";
@@ -130,6 +132,7 @@ function theme_almondb_frontpageblock04() {
     $templatecontext['block04header'] = format_string($theme->settings->block04header);
     $templatecontext['block04button'] = format_string($theme->settings->block04button);
     $templatecontext['block04buttonlink'] = $theme->settings->block04buttonlink;
+    $templatecontext['block04buttonenabled'] = $theme->settings->block04buttonenabled ?? 1;
     $count = 8;
     if ($theme->settings->block04design == 1) {
         $count = 8;
@@ -236,6 +239,7 @@ function theme_almondb_frontpageblock06() {
     $templatecontext['block06caption'] = format_text($theme->settings->block06caption);
     $templatecontext['block06button'] = format_string($theme->settings->block06button);
     $templatecontext['block06buttonlink'] = $theme->settings->block06buttonlink;
+    $templatecontext['block06buttonenabled'] = $theme->settings->block06buttonenabled ?? 1;
     $image = $theme->setting_file_url('sliderimageblock06img', 'sliderimageblock06img');
     if (empty($image)) {
         $image = $OUTPUT->image_url('almondb/block06/1', 'theme');
@@ -259,6 +263,7 @@ function theme_almondb_frontpageblock07() {
     $templatecontext['block07header'] = format_string($theme->settings->block07header);
     $templatecontext['block07button'] = format_string($theme->settings->block07button);
     $templatecontext['block07buttonlink'] = $theme->settings->block07buttonlink;
+    $templatecontext['block07buttonenabled'] = $theme->settings->block07buttonenabled ?? 1;
     $templatecontext['block07fullname'] = 0;
     $templatecontext['block07shortname'] = 0;
     if ($theme->settings->block07title == 'shortname') {
@@ -591,6 +596,30 @@ function theme_almondb_frontpageblock11() {
         }
     }
     return $templatecontext;
+}
+/**
+ * Build the list of dynamic "HTML + image" blocks.
+ *
+ * The number of blocks is controlled by the blockhtmlcount setting. Each block
+ * has an uploadable image and a free HTML editor; the image URL replaces the
+ * [[image]] placeholder inside the HTML so it can be positioned anywhere.
+ *
+ * @return array Map of instance number => ['index' => int, 'html' => string, 'image' => string].
+ */
+function theme_almondb_get_htmlblocks() {
+    $theme = theme_config::load('almondb');
+    $count = (int)($theme->settings->blockhtmlcount ?? 0);
+    $blocks = [];
+    for ($i = 1; $i <= $count; $i++) {
+        $imgsetting = 'blockhtmlimg' . $i;
+        $capsetting = 'blockhtmlcaption' . $i;
+        $image = (string)$theme->setting_file_url($imgsetting, $imgsetting);
+        $html = format_text($theme->settings->$capsetting ?? '');
+        // Insert the uploaded image wherever the placeholder appears.
+        $html = str_replace(['[[image]]', '{{image}}', '{{imagen}}'], $image, $html);
+        $blocks[$i] = ['index' => $i, 'html' => $html, 'image' => $image];
+    }
+    return $blocks;
 }
 /**
  * Frontpage block18.

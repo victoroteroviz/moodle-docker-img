@@ -15,13 +15,14 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_almondb/frontpage/frontpage_1
+    @template theme_almondb/frontpage/htmlblock
 
-    Moodle template for the frontpage frontpage_1.
+    Renders a single dynamic "HTML + image" block.
+
+    Context variables required for this template:
+    * index - Instance number (used for the section id).
+    * html - Already formatted HTML, with the image placeholder resolved.
 }}
-<!-- Start section -->
-{{! Blocks rendered in the order configured in the theme settings (drag and drop). }}
-{{#orderedblocks}}
-{{{html}}}
-{{/orderedblocks}}
-<!-- End section -->
+<section id="htmlblock{{index}}" class="hy-mt-50">
+    {{{html}}}
+</section>

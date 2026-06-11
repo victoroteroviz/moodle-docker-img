@@ -51,6 +51,13 @@ defined('MOODLE_INTERNAL') || die();
     $default = get_string('block01captiondefault', 'theme_almondb');
     $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
     $page->add($setting);
+    // Block 01 show button.
+    $name = 'theme_almondb/block01buttonenabled';
+    $title = get_string('buttonenabled', 'theme_almondb');
+    $description = get_string('buttonenableddesc', 'theme_almondb');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, 1);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
     // Block 01 button.
     $name = 'theme_almondb/block01button';
     $title = get_string('block01button', 'theme_almondb');

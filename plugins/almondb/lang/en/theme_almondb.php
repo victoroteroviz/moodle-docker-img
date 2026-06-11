@@ -168,6 +168,8 @@ $string['almondbpagefootersimple'] = 'Page footer';
 $string['almondbpagefootersimpledesc'] = 'Add footer to info page';
 // Button settings.
 $string['button'] = 'Button';
+$string['buttonenabled'] = 'Show button';
+$string['buttonenableddesc'] = 'Show or hide the call-to-action button in this block.';
 $string['buttonlink'] = 'https://themesalmond.com/';
 // Theme almondb settings !DO NOT DELETE !DO NOT CHANGE.
 $string['divdiv'] = '</div></div></div>';
@@ -279,6 +281,21 @@ $string['frontpagesection1_9'] = 'Section 9';
 $string['frontpagesectiondesc1_9'] = 'Front page section 9';
 $string['frontpagesection1_10'] = 'Section 10';
 $string['frontpagesectiondesc1_10'] = 'Front page section 10';
+// Frontpage block order (drag and drop).
+$string['blockorder'] = 'Block order';
+$string['blockorderdesc'] = 'Drag the blocks to set the order in which they appear on the front page. Disabled blocks keep their position in the list but are not shown on the page.';
+$string['block_enabled'] = 'Enabled';
+$string['block_disabled'] = 'Disabled';
+// Dynamic HTML + image blocks.
+$string['blockhtmlinfo'] = 'HTML + image blocks';
+$string['blockhtmlinfodesc'] = 'Create as many free HTML blocks with an image as you need. Each block can be placed independently in the block order list above. Use the placeholder [[image]] inside the HTML to insert the uploaded image, e.g. &lt;img src="[[image]]"&gt;.';
+$string['blockhtmlcount'] = 'Number of HTML + image blocks';
+$string['blockhtmlcountdesc'] = 'How many HTML + image blocks to create. Set to 0 to disable them. After saving, that many image and HTML fields will appear below.';
+$string['blockhtmlimg'] = 'Image for HTML block {$a}';
+$string['blockhtmlimgdesc'] = 'Upload an image for this block. Insert it in the HTML with the [[image]] placeholder.';
+$string['blockhtmlcaption'] = 'HTML for block {$a}';
+$string['blockhtmlcaptiondesc'] = 'Free HTML content. Write [[image]] where you want the uploaded image to appear, for example &lt;img src="[[image]]" alt=""&gt;.';
+$string['blockhtmlorderlabel'] = 'HTML + Image #{$a}';
 // Frontpage HTML block.
 $string['theme_almondb_frontpageblock'] = 'Block';
 $string['theme_almondb_frontpageblockheading'] = 'Front Page Blocks';

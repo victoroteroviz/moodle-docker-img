@@ -108,6 +108,13 @@ $description = get_string('block07headerdesc', 'theme_almondb');
 $default = get_string('block07headerdefault', 'theme_almondb');
 $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
 $page->add($setting);
+// Block 07 show button.
+$name = 'theme_almondb/block07buttonenabled';
+$title = get_string('buttonenabled', 'theme_almondb');
+$description = get_string('buttonenableddesc', 'theme_almondb');
+$setting = new admin_setting_configcheckbox($name, $title, $description, 1);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$page->add($setting);
 // Block 07 button.
 $name = 'theme_almondb/block07button';
 $title = get_string('block07button', 'theme_almondb');

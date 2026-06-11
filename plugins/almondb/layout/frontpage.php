@@ -143,4 +143,24 @@ $templatecontext = array_merge($templatecontext, theme_almondb_frontpageblock19(
 // Footer.
 $templatecontext = array_merge($templatecontext, theme_almondb_frontpageblock20());
 
+// Render the content blocks in the order configured in the theme settings
+// (drag and drop). Numeric tokens (e.g. "07") render their block partial with
+// the merged context; "htmlN" tokens render a dynamic HTML + image block.
+require_once($CFG->dirroot . '/theme/almondb/settings/blockorder_setting.php');
+$blockorder = theme_almondb_normalise_block_order(get_config('theme_almondb', 'blockorder'));
+$htmlblocks = theme_almondb_get_htmlblocks();
+$templatecontext['orderedblocks'] = [];
+foreach ($blockorder as $blockid) {
+    if (strpos($blockid, 'html') === 0) {
+        $index = (int)substr($blockid, 4);
+        if (!isset($htmlblocks[$index])) {
+            continue;
+        }
+        $blockhtml = $OUTPUT->render_from_template('theme_almondb/frontpage/htmlblock', $htmlblocks[$index]);
+    } else {
+        $blockhtml = $OUTPUT->render_from_template("theme_almondb/frontpage/block{$blockid}", $templatecontext);
+    }
+    $templatecontext['orderedblocks'][] = ['html' => $blockhtml];
+}
+
 echo $OUTPUT->render_from_template('theme_almondb/frontpage/frontpage', $templatecontext);

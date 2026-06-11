@@ -50,6 +50,13 @@ for ($i = 2; $i < 5; $i++) {
 $setting = new admin_setting_configselect($name, $title, $description, $default, $options);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
+// Block 02 show button.
+$name = 'theme_almondb/block02buttonenabled';
+$title = get_string('buttonenabled', 'theme_almondb');
+$description = get_string('buttonenableddesc', 'theme_almondb');
+$setting = new admin_setting_configcheckbox($name, $title, $description, 1);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$page->add($setting);
 // If we don't have an slide yet, default to the preset.
 $count = get_config('theme_almondb', 'block02count');
 // Block 02 general settings END.
