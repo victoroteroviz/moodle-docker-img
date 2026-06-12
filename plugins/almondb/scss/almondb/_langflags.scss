@@ -4,6 +4,14 @@
     padding-left: 0.75rem;
 }
 
+// Same flags for the language selector inside the user (profile) menu, shown when
+// the user is logged in. The template override drops Bootstrap's ps-5 on these items
+// (it is "padding-left: 2rem !important" and would misalign the flag), so this padding
+// now applies and matches the landing page menu above.
+.usermenu .dropdown-menu .langmenu-item {
+    padding-left: 0.75rem;
+}
+
 .langflag {
     flex: 0 0 auto;
     width: 1.3rem;

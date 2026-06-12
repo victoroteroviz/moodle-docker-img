@@ -110,3 +110,33 @@ function theme_almondb_add_lang_flags($langmenu) {
 
     return $langmenu;
 }
+
+/**
+ * Add a flag image URL to the language selector submenu inside the user menu.
+ *
+ * When a user is logged in the standalone language menu is empty; Moodle instead
+ * injects the language selector as a submenu of the user (profile) menu. This walks
+ * every submenu and reuses theme_almondb_add_lang_flags() so the language options
+ * shown there get the same flags as the ones on the landing page.
+ *
+ * @param mixed $usermenu The exported user menu (array or object), or empty.
+ * @return mixed The user menu with a "flagurl" added to every language submenu item.
+ */
+function theme_almondb_add_lang_flags_to_usermenu($usermenu) {
+    if (empty($usermenu)) {
+        return $usermenu;
+    }
+    $usermenu = (array)$usermenu;
+    if (empty($usermenu['submenus'])) {
+        return $usermenu;
+    }
+
+    $submenus = [];
+    foreach ($usermenu['submenus'] as $submenu) {
+        // Only language items resolve a code, so this is a no-op for other submenus.
+        $submenus[] = theme_almondb_add_lang_flags($submenu);
+    }
+    $usermenu['submenus'] = array_values($submenus);
+
+    return $usermenu;
+}
